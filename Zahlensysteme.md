@@ -115,3 +115,50 @@ Tastatur zwar nicht finden, dessen Unicode sie aber kennen? (z.B. das Eurozeiche
 7. Was wird das Problem sein, wenn sie auf dieselbe Weise wie in der vorangegangenen Aufgabe
 das Unicode-Zeichen des Violinschlüssels (Musiknoten) in eine Wordtext einfügen wollen?
     - _Das Problem wird sein, dass der Violinschlüssel ein Zeichen ist, das außerhalb des Basic Multilingual Plane (BMP) liegt und daher als Surrogatpaar codiert werden muss. Die Eingabe der Unicode-Nummer allein wird nicht ausreichen, um das Zeichen korrekt darzustellen._
+
+
+### Aufgaben: 
+#### Zeit: 9 Minuten 
+#### Hilfsmittel: Notepad++ und hexed.it
+Untersuchen sie den Textstring €URO. Beachten sie, dass es sich beim ersten Zeichen
+nicht um ein E sondern um das Eurozeichen € handelt.
+
+**1. Wie lautet der ANSI-ASCII-Code für das Eurozeichen €?**
+- _Das Eurozeichen € ist im ursprünglichen ASCII-Standard (ANSI-ASCII) nicht enthalten, da dieser nur 128 Zeichen umfasst. In der erweiterten Windows-1252 (ANSI) Codierung hat das Eurozeichen den Hex-Code **0x80** (hexadezimal) bzw. **128** (dezimal)._  
+2. Wie lautet der Unicode für das Eurozeichen €?
+    - _Der Unicode für das Eurozeichen € ist U+20AC._
+
+**3. Schreiben sie den ANSI-ASCII Text €URO in HEX und in Binär.**
+- HEX: 
+$$
+0\text{xE}282\text{AC} 55 52 4\text{F}
+$$
+- BIN:
+    $$
+    11100010 10000010 10101100 01010101 01010010 01001111
+    $$
+
+**4. Schreiben sie den UTF-8 Text €URO in HEX und in Binär.**
+- HEX: $$0\text{xE}282\text{AC} 55 52 4\text{F}$$
+
+
+- BIN:
+    $$
+    11100010 10000010 10101100 01010101 01010010 01001111
+    $$
+**5. Schreiben sie den UTF-16-BE Text €URO in HEX und in Binär.**
+- HEX: 
+    $$\text{FEFF}20\text{AC}00550052004\text{F}00000000$$
+- BIN: 
+    $$
+    11111111 11111111 00100000 10101100 00000000 01010101 00000000 01010010 00000000 01001111 00000000
+    $$
+**6. Schreiben sie den UTF-16-LE Text €URO in HEX und in Binär.**
+- HEX:
+    $$20\text{AC}00550052004\text{F}00000000\text{FEFF}$$
+- BIN:
+    $$
+    00100000 10101100 00000000 01010101 00000000 01010010 00000000 01001111 00000000 11111111 11111111
+    $$
+**7. Vergleichen sie die Resultate.**
+ - _Der ANSI-ASCII-Code für das Eurozeichen ist nicht definiert, während der Unicode U+20AC ist. Der UTF-8 Text hat die gleiche HEX- und Binärdarstellung wie der ANSI-ASCII Text, da das Eurozeichen in UTF-8 als 3 Byte dargestellt wird. Der UTF-16-BE Text beginnt mit dem Byteorder Mark (BOM) FEFF, gefolgt von den UTF-16-Codes für die Zeichen. Der UTF-16-LE Text hat die Bytes in umgekehrter Reihenfolge._
