@@ -70,13 +70,15 @@ SOLL-UNTERRICHTSPLANUNG (IST siehe Tagesagenda)
 
 ---DATEN CODIEREN---
 
+[Codieren.pdf](Codieren.md)
+
 Lernziele:
 
 Massvorsätze k/M/G/T ki/Mi/Gi/Ti, Bit/Byte, AND/OR/NOT/XOR
 
 Parallele/Serielle Datenübertragung, Clock-Signal
 
-Zahlensysteme BIN/DEZ/HEX
+[Zahlensysteme](Zahlensysteme.md) BIN/DEZ/HEX
 
 Binäre Addition, Negative Binärzahlen/2-er Komplement, DataOverflow
 
@@ -192,3 +194,8 @@ Reserve: SSH einrichten
 
 Hinweis: 11. Juli Sommersporttag
  
+
+
+ Theorie
+ Aufgaben
+ Erarbeitete Aufträge
