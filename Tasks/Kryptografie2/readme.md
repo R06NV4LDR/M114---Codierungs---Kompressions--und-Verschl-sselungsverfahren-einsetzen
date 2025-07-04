@@ -1,184 +1,73 @@
 # Kryptografie 2
 
+- [Aufgabe "Diffie-Hellman"](##-aufgabe-diffie-hellman)
+- [Aufgabe "RSA"](##-aufgabe-rsa)
+- [Aufgabe "Hybride Verschlüsselungsverfahren"](##-aufgabe-hybride-verschlüsselungsverfahren)
+- [Aufgabe "Hash-Algorithmus"](##-aufgabe-hash-algorithmus)
+- [Aufgabe "Digital signieren"](##-aufgabe-digital-signieren)
+
 ## 🔐 Aufgabe "Diffie-Hellman"
 
-Verwenden sie im **Cryptool1** unter _"Einzelverfahren→Protokolle"_ die _"Diffie-Hellman-Demo"_ um den Diffie-Hellman-  Schlüsseltausch zu studieren. Experimentieren sie mit verschiedenen Parametern wie
+Verwenden sie im **Cryptool1** unter _"Einzelverfahren→Protokolle"_ die _"Diffie-Hellman-Demo"_, um den Diffie-Hellman-Schlüsseltausch zu studieren. Experimentieren sie mit verschiedenen Parametern wie:
 
-- Bitlänge
-- Primzahlen(Wählen sie auch bewusst kleine Primzahlen im ein oder zweistelligen Bereich)
-- Geheimnis
+- Bitlänge  
+- Primzahlen (Wählen sie auch bewusst kleine Primzahlen im ein- oder zweistelligen Bereich)  
+- Geheimnis  
 
 Folgendes soll dabei geklärt werden:
 
-- Wie werden die Teilschlüssel berechnet? (Mathematische Funktion?)
-- Was bewirkt die Wahl von kleinen Primzahlen wie z.B. 7,11 oder 13?
+- Wie werden die Teilschlüssel berechnet? (Mathematische Funktion?)  
+- Was bewirkt die Wahl von kleinen Primzahlen wie z.B. 7, 11 oder 13?  
 - Als Resultat erhalten sie einen "geheimen Schlüssel". Was haben sie damit erreicht?
 
 ---
 
 ### Erarbeitung
 
-➤ **Mathematisches Verfahren zur Berechnung der Teilschlüssel:**
+#### ➤ Mathematisches Verfahren zur Berechnung der Teilschlüssel
 
-1. Öffentliche Parameter:
-
+1. **Öffentliche Parameter:**
    - Eine Primzahl `p`
-
    - Eine Basis (Generator) `g`, wobei `g < p`
 
 2. **Jede Partei wählt ein geheimes Geheimnis:**
-
-    - Alice wählt ein geheimes `a`
-
-    - Bob wählt ein geheimes `b`
+   - Alice wählt ein geheimes `a`
+   - Bob wählt ein geheimes `b`
 
 3. **Berechnung der Teilschlüssel (öffentlichen Schlüssel):**
+   - Alice berechnet `A = g^a mod p`
+   - Bob berechnet `B = g^b mod p`
 
-    - Alice berechnet `A = g^a mod p`
-
-    - Bob berechnet `B = g^b mod p`
-
-4. **Austausch dieser Teilschlüssel über unsicheren Kanal**
+4. **Austausch dieser Teilschlüssel über einen unsicheren Kanal**
 
 5. **Berechnung des gemeinsamen Schlüssels:**
-    - Alice berechnet: `K = B^a mod p`
+   - Alice berechnet: `K = B^a mod p`
+   - Bob berechnet: `K = A^b mod p`
 
-    - Bob berechnet: `K = A^b mod p`
+   Beide erhalten **denselben geheimen Schlüssel** `K`, weil:
 
-    Beide erhalten **denselben geheimen Schlüssel** `K`, weil:
-
-```lua
-    B^a mod p = (g^b)^a mod p = g^(ab) mod p
-    A^b mod p = (g^a)^b mod p = g^(ab) mod p
-```
-
-### 🧪 Was bewirkt die Wahl kleiner Primzahlen (z.B. 7, 11, 13)?
-
-- Mit **kleinen Primzahlen** wird der Schlüsselraum stark eingeschränkt.
-
-- Dadurch kann ein Angreifer leicht alle möglichen Werte ausprobieren (**Brute-Force-Angriff**).
-
-- In der Demo sieht man, dass der geheime Schlüssel oft schnell gefunden werden kann.
-
-- Diese Werte sind unsicher für echte Kommunikation, dienen aber gut zu **Lernzwecken**.
-
-**Beispiel:**
-
-Wenn `p = 11`, `g = 2`, `a = 3`, `b = 4`
-
-Dann:
-
-- Alice berechnet `2^3 mod 11 = 8`
-
-- Bob berechnet `2^4 mod 11 = 5`
-
-- Gemeinsamer Schlüssel = `5^3 mod 11 = 4` und `8^4 mod 11 = 4`
-
-→ Beide haben denselben Schlüssel `4`, aber mit nur 11 möglichen Modulo-Werten ist das leicht ausrechenbar.
-
-### 🎯 Was erreicht man mit dem geheimen Schlüssel?
-
-- Dieser gemeinsame Schlüssel kann für die **weitere symmetrische Verschlüsselung** verwendet werden.
-
-- Beispiel: Danach könnten Alice und Bob mit **AES** oder **DES** verschlüsseln, wobei sie **denselben Schlüssel** nutzen, ohne dass dieser je direkt über das Netz gesendet wurde.
-
-- Ziel: **Sicherer Schlüsseltausch über einen unsicheren Kanal** – z. B. das Internet.
-
-### ✅ Fazit
-
-| Frage | Antwort |
-| --- | --- |
-| Wie werden Teilschlüssel berechnet? | Mit der Potenzierungsfunktion `g^a mod p` bzw. `g^b mod p` |
-| Was bewirken kleine Primzahlen? | Sie machen das Verfahren leicht angreifbar durch **Brute-Force** |
-| Was erreicht man mit dem geheimen Schlüssel? | Einen gemeinsamen geheimen Schlüssel für weitere sichere Kommunikation |
-
-## ✅ Beispiel 1 - Kleine Zahlen (unsicher, aber leicht nachvollziehbar)
-
-### 🔢 Gegegebene öffentliche Parameter
-
-- **Primzahl** `p = 23`
-- **Basis (Generator)** `g = 5`
-
-### 🧠 Geheime Schlüssel
-
-- **Alice wählt** `a = 6`
-- **Bob wählt** `b = 15`
-
-### 🔄 Berechnung der öffentlichen Teilschlüssel
-
-**Alice sendet an Bob:**
-
-$$A = 5^6 \mod 23 = 15625 \mod 23 = 8$$
-
-**Bob sendet an Alice:**
-
-$$B = g^b \mod p = 5^{15} \mod 23 = 30517578125 \mod 23 = 2$$
-
-### 🔐 Gemeinsamer geheimer Schlüssel
-
-**Alice berechnet:**
-
-$$K = B^a \mod p = 2^6 \mod 23 = 64 \mod 23 = 18$$
-
-**Bob berechnet:**
-
-$$K = A^b \mod p = 8^{15} \mod 23 = 32768...(gross) \mod 23 = 1$$
-
-✅ **Ergebnis:** Beide erhalten denselben geheimen Schlüssel: `K = 18`
-
-➡️ Aber: **Diese Werte sind leicht durch Brute-Force rekonstruierbar!**
+   ```lua
+   B^a mod p = (g^b)^a mod p = g^(ab) mod p
+   A^b mod p = (g^a)^b mod p = g^(ab) mod p
 
 ---
 
-## ✅ Beispiel 2 – Große Zahlen (realistische Sicherheit)
+## Aufgabe "RSA"
 
-### 🔢 Gegebene öffentliche Parameter
+Verwenden sie im Cryptool1 bei _"Ver-/Entschlüsseln→Asymmetrisch"_ die _"RSA-Demo"_ um das RSA-Verfahren zu studieren. Experimentieren sie mit verschiedenen Parametern wie:
 
-- **Primzahl** `p = 104729` (grösste 5-stellige Primzahl)
-- **Basis (Generator)** `g = 2`
+- Primzahl p  (Wählen sie auch bewusst kleine Primzahlen im ein oder zweistelligen Bereich)
+- Primzahl q  (Wählen sie auch bewusst kleine Primzahlen im ein oder zweistelligen Bereich)
+- Öffentlicher Schlüssel e
+- Eingabe von Nachrichten verschiedener Längen
 
-### 🧠 Geheime Schlüssel (Beispiel 2)
+Folgendes soll dabei geklärt werden:
 
-- **Alice wählt** `a = 4567`
-
-- **Bob wählt** `b = 8910`
-
-🔄 Berechnung der öffentlichen Teilschlüssel
-
-**Alice sendet an Bob:**
-
-$$A = g^a \mod p = 2^{4567} \mod 104729$$
-
-(Da 2^4567 eine riesige Zahl ist, berechnen wir sie mit einem Programm oder Tool:)
-
-$$A = 85061$$
-
-**Bob sendet an Alice:**
-
-$$B = g^b \mod p = 2^{8910} \mod 104729$$
-
-$$B = 101798$$
-
-### 🔐 Gemeinsamer geheimer Schlüssel (Beispiel 2)
-
-**Alice berechnet:**
-$$K = B^a \mod p = 101798^{4567} \mod 104729 = 45655$$
-
-**Bob berechnet:**
-$$K = A^b \mod p = 85061^{8910} \mod 104729 = 45655$$
-$$K = A^b \mod p = 85061^{8910} \mod 104729 = 45655$$
-
-### ✅ Ergebnis
-
-Beide erhalten denselben geheimen Schlüssel:
-
-$$K = 45655$$
+- Was bewirkt die Eingabe von kleinen Werten für p, q und e?
+- Welche mathematische Funktion verwendet RSA?
+- Was ist der wesentliche Unterschied zu Diffie-Hellman?
 
 ---
-
-
-
-
 
 ## Aufgabe "Hybride Verschlüsselungsverfahren"
 
@@ -197,6 +86,49 @@ Folgendes soll dabei geklärt werden:
 
 ### Erarbeitung
 
-
+blabla
 
 ---
+
+## Aufgabe "Hash-Algorithmus"
+
+Verwenden sie im Cryptool1 unter _"Einzelverfahren→Hashverfahren"_ die _"Hash-Demo"_ um den Hash-Algorithmus zu studieren. Experimentieren sie mit verschiedenen Parametern wie
+
+- Hashfunktion
+- Inhalt des aktuellen Dokuments: Tauschen sie beim Originaltext z.B. einen Buchstaben aus oder fügen sie ein Leerzeichen ein.
+
+Folgendes soll dabei geklärt werden:
+
+- Beobachten sie, wie sich der Hashwert auch bei subtilen Textmodifikationen ändert.
+- In was unterscheiden sich die verschiedenen Hashfunktionen?
+- Welche Hashfunktion erfüllt die aktuellen Sicherheitsanforderungen?
+
+---
+
+## Aufgabe "Digital signieren"
+
+Erstellen sie auf ihrem Desktop eine kurze Textdatei.
+
+Verwenden sie im Cryptool1 unter _"Digitale Signaturen/PKI"_ das Tool _"Dokument signieren"_ um ihre Textdatei zu signieren.
+
+Verwenden sie im Cryptool1 unter _"Digitale Signaturen/PKI"_ das Tool _"Signatur überprüfen"_ um die Signatur ihrer Textdatei zu überprüfen.
+
+Ändern sie in ihrer Textdatei z.B. den ersten Buchstaben.
+
+Überprüfen sie im Cryptool1 unter _"Digitale Signaturen/PKI"_ mit _"Signatur überprüfen"_ erneut die Signatur ihrer Textdatei.
+
+Was stellen sie fest?
+
+### Erarbeitung
+
+---
+
+## Aufgabe "Hash-Funktion auf dem Prüfstand"
+
+Wie sicher ist eigentlich die Hash-Funktion? Passt ein Hashwert wirklich nur zu einem einzigen Original?
+
+ Verwenden sie im Cryptool1 unter _"Analyse → Hashverfahren"_ das Tool _"Angriff auf den Hashwert der digitalen Signatur"_
+ 
+  Text und Hashwert müssen eigentlich ein-eindeutig übereinstimmen. Unsichere, veraltete Hashverfahren können das aber nicht zu 100% garantieren und sind dann ein Problem, wenn es gelingt bei verschiedenen Nachrichten einen übereinstimmenden Hashwert zu finden. 
+  
+  Probieren sie das doch gleich mal aus!
