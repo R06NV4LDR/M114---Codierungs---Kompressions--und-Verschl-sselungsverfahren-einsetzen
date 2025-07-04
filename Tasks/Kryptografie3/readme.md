@@ -19,5 +19,17 @@ darum keinesfalls vergessen und niemals weitergeben.
 
 2. **Nachricht signieren:** Nun soll eine Datei für ihren Kommunikationspartner signiert werden. Dies kann ebenfalls wieder direkt in Kleopatra erfolgen. Stellen sie das File inklusive Signatur ihrem Kommunikationspartner zur Verfügung. Wenn dieser mit der Signatur die Echtheit ihres Files verifizieren kann, wurde der Auftrag erfolgreich erledigt.
 
-3. **Nachricht verschlüsseln und signieren:** Diesmal soll eine Datei für ihren Kommunikationspartner verschlüsselt und signiert werden. Wiederum in Kleopatra. Stellen sie das File inklusive Signatur ihrem Kommunikationspartner zur Verfügung. Wenn dieser das File entschlüsseln und dank der Signatur den Absender verifizieren kann, wurde der Auftrag erfolgreich erledigt. 
+3. **Nachricht verschlüsseln und signieren:** Diesmal soll eine Datei für ihren Kommunikationspartner verschlüsselt und signiert werden. Wiederum in Kleopatra. Stellen sie das File inklusive Signatur ihrem Kommunikationspartner zur Verfügung. Wenn dieser das File entschlüsseln und dank der Signatur den Absender verifizieren kann, wurde der Auftrag erfolgreich erledigt.
 Zusatzfrage: Welchen Mehrwert hat das Verschlüsseln mit zusätzlichem Signieren?
+
+## Auftrag "Den Mailclient Thunderbird installieren und einrichten"  Dauer: 40 Min
+
+1. Installieren sie den eMail-Client "Mozilla Thunderbird". Siehe https://www.thunderbird.net/de/
+2. Richten sie ihr eMail-Konto darin ein. Es wird empfohlen, nicht ihr produktiver eMail-Account zu verwenden, sondern ein explizit für Tests eingerichteten.
+3. Überprüfen sie ihre Thunderbird-Installation bzw. Konfiguration, indem sie gegenseitig unverschlüsselte eMails austauschen.
+4. Nun widmen wir uns der Ende-zu-Ende Verschlüsselung: Erzeugen sie sich ein OpenPGP-Schlüsselpaar. (Hinweis: Ihr OpenPGP-Schlüsselpaar, das sie in Kleopatra kreiert haben, könnte hier auch verwendet werden.)
+5. Tauschen sie die PublicKeys gegenseitig aus.
+6. Nun geht es an den eMail-Austausch: Schicken sie ihrem Kommunikationspartner/in verschlüsselte und/oder signierte eMails.
+7. Zur Kontrolle schicken sie eine verschlüsselte eMail an edu@juergarnold.ch (Hinweis: Den hierfür benötigte PublicKey finden sie hier: https://edu.juergarnold.ch/Thunderbird_PK_ARJ.zip)
+8. Erstellen sie eine Kurzanleitung, die ihre Installationsschritte beschreibt und geben sie diese auf Teams/Aufgaben der Lehrperson ab. In ihre Kurzanleitung muss die Thunderbird-Versionsnummer erwähnt sein, auf die sich ihre Arbeitsschritte beziehen.
+
